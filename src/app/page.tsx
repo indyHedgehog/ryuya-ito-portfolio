@@ -1,9 +1,17 @@
 'use client';
 
-import { Container, Typography, Box, Grid, Divider } from '@mui/material';
+import {
+  Container,
+  Typography,
+  Box,
+  Grid,
+  Divider,
+  Avatar,
+} from '@mui/material';
 import { ProjectCard } from '@/components/ProjectCard';
 import { Contact } from '@/components/Contact';
 import { projectsData } from '@/data/projectsData';
+import { AboutMe } from '@/components/AboutMe';
 
 export default function Home() {
   return (
@@ -35,28 +43,24 @@ export default function Home() {
       <Divider sx={{ mb: 8 }} />
 
       {/* 2. プロフィールセクション (簡易版) */}
-      <Box sx={{ mb: 12 }}>
+      <Box sx={{ mb: 12, maxWidth: '800px', mx: 'auto' }}>
         <Typography
           variant="h4"
           component="h2"
           gutterBottom
-          sx={{ fontWeight: 'bold', mb: 3 }}
+          sx={{ fontWeight: 'bold', mb: 4 }}
         >
           About Me
         </Typography>
-        <Typography
-          variant="body1"
-          color="text.secondary"
-          sx={{ fontSize: '1.1rem', lineHeight: 1.8, maxWidth: '800px' }}
-        >
-          システムエンジニアとして上流工程からフロントエンドの実装、UI/UXデザインまで幅広く携わっています。
-          React, TypeScript, MUI
-          などのモダンな技術スタックを用いた、ユーザーが直感的に操作できる画面設計と、堅牢なコンポーネント開発を得意としています。
-        </Typography>
+
+        {/* 写真とテキストを横並び（スマホでは縦並び）にするためのコンテナ */}
+        <AboutMe />
       </Box>
 
       {/* 3. 作品一覧（プロダクト）セクション */}
-      <Box sx={{ mb: 12 }}>
+      <Box sx={{ mb: 12, maxWidth: '800px', mx: 'auto' }}>
+        {' '}
+        {/* ★ About Me と同じ幅 (800px) に合わせると綺麗にまとまります */}
         <Typography
           variant="h4"
           component="h2"
@@ -65,11 +69,9 @@ export default function Home() {
         >
           Projects
         </Typography>
-
-        {/* MUIの新しいGridシステムを使用 */}
         <Grid container spacing={4}>
           {projectsData.map((project) => (
-            <Grid key={project.id} size={{ xs: 12, sm: 6, md: 4 }}>
+            <Grid key={project.id} size={{ xs: 12 }}>
               <ProjectCard project={project} />
             </Grid>
           ))}
