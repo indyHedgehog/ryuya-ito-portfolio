@@ -3,7 +3,7 @@ import { Project } from '@/types/project';
 export const projectsData: Project[] = [
   {
     id: 'staffing-system',
-    title: 'Figamaを用いたプロトタイピング作成',
+    title: 'Figamaを用いたプロトタイピング',
     shortDescription:
       '人材系システム刷新の入札争いにデモ作成チームとして参加し、入札に貢献。',
     fullDescription:

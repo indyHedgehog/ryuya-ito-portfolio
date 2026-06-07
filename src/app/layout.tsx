@@ -1,9 +1,9 @@
-import type { Metadata } from "next";
-import React from "react";
+import type { Metadata } from 'next';
+import React from 'react';
 
 export const metadata: Metadata = {
-  title: "My Portfolio",
-  description: "Created with React, TypeScript, and MUI",
+  title: 'My Portfolio',
+  description: 'Created with React, TypeScript, and MUI',
 };
 
 export default function RootLayout({
