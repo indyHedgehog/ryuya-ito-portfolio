@@ -5,6 +5,7 @@ import { Box, Grid, Typography } from '@mui/material';
 
 export const AboutMe: React.FC = () => {
   return (
+    // 写真エリア
     <Box
       sx={{
         display: 'flex',
@@ -34,7 +35,14 @@ export const AboutMe: React.FC = () => {
           textAlign: { xs: 'center', md: 'left' },
         }}
       >
-        <Grid container spacing={4}>
+        <Grid container spacing={1}>
+          <Typography
+            variant="body1"
+            color="text.secondary"
+            sx={{ fontSize: '1.2rem', lineHeight: 2.8, fontWeight: 'bold' }}
+          >
+            伊藤 竜矢 （2001年生まれ）
+          </Typography>
           <Typography
             variant="body1"
             color="text.secondary"

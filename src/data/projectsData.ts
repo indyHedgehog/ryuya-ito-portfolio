@@ -3,12 +3,12 @@ import { Project } from '@/types/project';
 export const projectsData: Project[] = [
   {
     id: 'staffing-system',
-    title: '人材派遣・イベント運営会社向けシステム',
+    title: 'Figamaを用いたプロトタイピング作成',
     shortDescription:
-      'Figmaによる画面設計からReact実装までを担当した管理システム。',
+      '人材系システム刷新の入札争いにデモ作成チームとして参加し、入札に貢献。',
     fullDescription:
       'イベント運営におけるスタッフの配置やスケジュール管理を円滑にするための社内向けWebシステムです。',
-    imageUrl: '/images/project1.jpg', // public/images/ 内に配置
+    imageUrl: '/images/works/Figma Icon (Full-color).svg', // public/images/ 内に配置
     issue:
       '手動でのスタッフマッチングに膨大な時間がかかり、配置ミスが発生していた。',
     approach:
