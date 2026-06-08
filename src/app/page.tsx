@@ -8,6 +8,7 @@ import { AboutMe } from '@/components/AboutMe';
 import { Section } from '@/components/Section';
 import { HobbyList } from '@/components/HobbyCard';
 import { Header } from '@/components/layout/Header'; // ★ ヘッダーをインポート
+import { SkillMagnet } from '@/components/SkillMagnet';
 
 export default function Home() {
   return (
@@ -49,6 +50,10 @@ export default function Home() {
         <Box id="about-me">
           <Section title="About Me">
             <AboutMe />
+          </Section>
+
+          <Section title="Skills">
+            <SkillMagnet />
           </Section>
 
           <Section title="Hobbies">

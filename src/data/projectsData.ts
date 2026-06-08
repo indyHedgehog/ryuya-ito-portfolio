@@ -8,7 +8,7 @@ export const projectsData: Project[] = [
       '人材系システム刷新の入札争いにデモ作成チームとして参加し、入札に貢献。',
     fullDescription:
       'イベント運営におけるスタッフの配置やスケジュール管理を円滑にするための社内向けWebシステムです。',
-    imageUrl: '/images/works/Figma Icon (Full-color).svg', // public/images/ 内に配置
+    imageUrl: '/images/icons/Figma.svg', // public/images/ 内に配置
     issue:
       '手動でのスタッフマッチングに膨大な時間がかかり、配置ミスが発生していた。',
     approach:
