@@ -238,15 +238,13 @@ export const SkillMagnet: React.FC = () => {
           animate={
             exploded
               ? {
-                  // 💡 揺れ始めのステップ（0から-10、そして+8）を一気に急勾配にして初速をマックスに
                   rotate: [0, -10, 8, -5, 3, -1, 0],
                   x: [0, -4, 4, -2, 1, 0],
                 }
               : { rotate: 0, x: 0 }
           }
           transition={{
-            duration: 0.5, // 💡 初速を極限まで速くした分、全体の収束時間も 0.5秒 に sharp 化
-            // 💡 最初が一番早く、後半にかけて急激に減衰するカスタムイージング（ベジェ曲線）
+            duration: 0.5,
             ease: [0.08, 0.85, 0.2, 1],
           }}
         >
@@ -257,14 +255,14 @@ export const SkillMagnet: React.FC = () => {
               color: 'primary.main',
               opacity: 0.14,
               fontWeight: '900',
-              fontSize: { xs: '2.5rem', sm: '4.5rem', md: '5.5rem' },
+              fontSize: { xs: '5.5rem', sm: '4.5rem', md: '5.5rem' },
               letterSpacing: '0.05em',
               textTransform: 'uppercase',
               whiteSpace: 'nowrap',
             }}
           >
             <Box component="span" sx={{ display: { xs: 'block', md: 'none' } }}>
-              Tap here!
+              Tap!!
             </Box>
             <Box component="span" sx={{ display: { xs: 'none', md: 'block' } }}>
               Click here!
@@ -289,7 +287,6 @@ export const SkillMagnet: React.FC = () => {
             height: '60px',
             borderRadius: '50%',
             border: '4px solid #2196F3', // 線の太さを 3px -> 4px に強化
-            // 💡 光彩（グロー効果）の範囲を広げてより眩しく
             boxShadow: '0 0 30px #2196F3, inset 0 0 30px #2196F3',
             pointerEvents: 'none',
             zIndex: 5,
