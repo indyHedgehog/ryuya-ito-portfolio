@@ -2,33 +2,30 @@ import { Project } from '@/types/project';
 
 export const projectsData: Project[] = [
   {
-    id: 'staffing-system',
-    title: 'Figmaプロトタイピングでの入札',
-    shortDescription:
-      '人材系システム刷新の入札争いにデモ作成チームとして参加し、入札に貢献。',
-    fullDescription:
-      'イベント運営におけるスタッフの配置やスケジュール管理を円滑にするための社内向けWebシステムです。',
-    imageUrl: '/images/works/Figma.webp', // public/images/ 内に配置
-    issue:
-      '手動でのスタッフマッチングに膨大な時間がかかり、配置ミスが発生していた。',
-    approach:
-      '直感的に操作できるカレンダーUIと、スキルに応じた自動フィルタリング機能の導入。',
-    ingenuity:
-      'MUIのコンポーネントをカスタマイズし、情報量が多くても scannable（一目で把握できる）な画面設計を意識しました。',
+    id: 'my-portfolio',
+    title: "Ryuya's laboratory作成（Webサイト）",
+    period: '2026.06 - Now', // 2026年現在のタイムラインに合わせています
+    technologies: [
+      'React',
+      'TypeScript',
+      'Material UI',
+      'Three.js',
+      'Framer Motion',
+    ],
+    summary:
+      '「シンプル」な使いやすさと、触れたときの「ワクワク」を両立させることをコンセプトに構築しました。細部までこだわりを詰め込んでいますので、ぜひ楽しんでご覧ください。',
+    imageUrl: '/images/works/Portfolio.webp', // ポートフォリオのキャプチャ画像などのパス
+    // content: <Work2 /> // ★ この下に用意した個別コンポーネントをドッキング
   },
-  // {
-  //   id: 'ex',
-  //   title: '人材派遣・イベント運営会社向けシステム',
-  //   shortDescription:
-  //     'Figmaによる画面設計からReact実装までを担当した管理システム。',
-  //   fullDescription:
-  //     'イベント運営におけるスタッフの配置やスケジュール管理を円滑にするための社内向けWebシステムです。',
-  //   imageUrl: '/images/project1.jpg', // public/images/ 内に配置
-  //   issue:
-  //     '手動でのスタッフマッチングに膨大な時間がかかり、配置ミスが発生していた。',
-  //   approach:
-  //     '直感的に操作できるカレンダーUIと、スキルに応じた自動フィルタリング機能の導入。',
-  //   ingenuity:
-  //     'MUIのコンポーネントをカスタマイズし、情報量が多くても scannable（一目で把握できる）な画面設計を意識しました。',
-  // },
+  {
+    id: 'staffing-system',
+    title: '人材管理システム入札 （デモ作成チーム）',
+    period: '2025.07 - 2025.09',
+    technologies: ['Figma', 'UI/UX'],
+    summary:
+      '大手イベント会社のシステム刷新コンペにて、画面設計・プロトタイプ作成を担当しました。',
+    imageUrl: '/images/works/Figma.webp',
+    // content: <Work1 /> // ★ ここで個別コンポーネントをドッキング！
+  },
+  
 ];

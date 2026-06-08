@@ -1,10 +1,14 @@
+// types/project.ts
+import React from 'react';
+
 export interface Project {
   id: string;
   title: string;
-  shortDescription: string; // カード用の短い概要
-  fullDescription: string; // 詳細ページ用の長い概要
-  imageUrl: string; // 画像URL（またはパブリックのパス）
-  issue: string; // 課題
-  approach: string; // アプローチの観点
-  ingenuity: string; // 工夫した点
+  period: string; // 実施期間 (例: "2025.10 - 2026.02")
+  technologies: string[]; // 使用技術 (例: ["React", "TypeScript", "Material UI"])
+  summary: string; // 概要・要約
+  imageUrl: string; // ヘッダー用アイキャッチ画像
+
+  // 各プロジェクト固有のメインコンテンツ（コンポーネント）を保持する枠
+  content?: React.ReactNode;
 }

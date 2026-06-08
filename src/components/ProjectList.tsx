@@ -19,16 +19,18 @@ interface ProjectCardProps {
 // 1. 単体のカードコンポーネント（関心事はカードの内側だけ）
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
   return (
-    <Card sx={{ maxWidth: '100%', width: '100%', borderRadius: 3, boxShadow: 2 }}>
+    <Card
+      sx={{ maxWidth: '100%', width: '100%', borderRadius: 3, boxShadow: 2 }}
+    >
       <CardActionArea
         component={Link}
         href={`/projects/${project.id}`}
-        sx={{ 
-          display: 'flex', 
+        sx={{
+          display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           alignItems: 'center',
           justifyContent: 'flex-start',
-          p: { xs: 2, sm: 3 }
+          p: { xs: 2, sm: 3 },
         }}
       >
         <CardMedia
@@ -43,7 +45,9 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           }}
         />
 
-        <CardContent sx={{ flex: 1, pl: { xs: 0, sm: 4 }, pt: { xs: 2, sm: 0 } }}>
+        <CardContent
+          sx={{ flex: 1, pl: { xs: 0, sm: 4 }, pt: { xs: 2, sm: 0 } }}
+        >
           <Typography
             gutterBottom
             variant="h5"
@@ -52,8 +56,12 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           >
             {project.title}
           </Typography>
-          <Typography variant="body2" color="text.secondary" sx={{ lineHeight: 1.6 }}>
-            {project.shortDescription}
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            sx={{ lineHeight: 1.6 }}
+          >
+            {project.summary}
           </Typography>
         </CardContent>
       </CardActionArea>
