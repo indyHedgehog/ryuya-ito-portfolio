@@ -167,12 +167,19 @@ export default async function ProjectDetailPage({ params }: PageProps) {
         )}
       </Container>
 
-      {/* ─── 3. Topボタン（固定配置） ─── */}
+      {/* ─── 3. Topボタン（PCは左上、スマホは右下に自動切り替え） ─── */}
       <Box
         sx={{
           position: 'fixed',
-          top: 32,
-          left: 32,
+
+          // ★ 縦位置のレスポンシブ制御
+          top: { xs: 'auto', md: 32 }, // スマホではtopを無効化、PCでは上から32px
+          bottom: { xs: 32, md: 'auto' }, // スマホでは下から32px、PCではbottomを無効化
+
+          // ★ 横位置のレスポンシブ制御
+          left: { xs: 'auto', md: 32 }, // スマホではleftを無効化、PCでは左から32px
+          right: { xs: 32, md: 'auto' }, // スマホでは右から32px、PCではrightを無効化
+
           zIndex: 1000,
         }}
       >
@@ -180,7 +187,17 @@ export default async function ProjectDetailPage({ params }: PageProps) {
           <Button
             variant="contained"
             color="inherit"
-            startIcon={<SettingsBackupRestoreIcon />}
+            // 💡 アイコンの位置も、PC（左上）ならテキストの左（start）、スマホ（右下）ならテキストの右（end）に動的切り替え
+            startIcon={
+              <SettingsBackupRestoreIcon
+                sx={{ display: { xs: 'none', md: 'block' } }}
+              />
+            }
+            endIcon={
+              <SettingsBackupRestoreIcon
+                sx={{ display: { xs: 'block', md: 'none' } }}
+              />
+            }
             sx={{
               fontWeight: 'bold',
               px: 3,
