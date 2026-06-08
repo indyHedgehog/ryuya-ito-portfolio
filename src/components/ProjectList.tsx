@@ -48,6 +48,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <CardContent
           sx={{ flex: 1, pl: { xs: 0, sm: 4 }, pt: { xs: 2, sm: 0 } }}
         >
+          {/* タイトル */}
           <Typography
             gutterBottom
             variant="h5"
@@ -56,6 +57,23 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           >
             {project.title}
           </Typography>
+
+          {/* 所属・背景 */}
+          <Typography
+            variant="caption"
+            color="primary.main" // ★ text.secondary から変更して青色に統一
+            sx={{
+              display: 'block',
+              mb: 1.5,
+              fontWeight: 600, // ★ 500〜600あたりで全体の太さとバランスを取っています
+              letterSpacing: '0.04em',
+              fontSize: '0.75rem', // ★ キャプションとして自然なサイズ感に微調整
+            }}
+          >
+            {project.context}
+          </Typography>
+
+          {/* 概要 */}
           <Typography
             variant="body2"
             color="text.secondary"

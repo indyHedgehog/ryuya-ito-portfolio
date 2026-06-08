@@ -83,6 +83,21 @@ export default async function ProjectDetailPage({ params }: PageProps) {
             {project.title}
           </Typography>
 
+          {/* 所属・背景 */}
+          <Typography
+            variant="body1"
+            sx={{
+              display: 'block',
+              mb: 2, // 期間との余白
+              color: 'primary.main',
+              fontWeight: 700,
+              fontSize: { xs: '1rem', md: '1.1rem' },
+              letterSpacing: '0.02em',
+            }}
+          >
+            {project.context}
+          </Typography>
+
           {/* 実施期間 */}
           <Box
             sx={{
