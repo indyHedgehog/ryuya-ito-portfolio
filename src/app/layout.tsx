@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import React from 'react';
 
 export const metadata: Metadata = {
-  title: 'My Portfolio',
+  title: "Ryuya's Lab",
   description: 'Created with React, TypeScript, and MUI',
 };
 

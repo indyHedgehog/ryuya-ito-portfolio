@@ -30,7 +30,7 @@ export default function Home() {
               color: 'text.primary',
             }}
           >
-            Ryuya Ito / Portfolio
+            Ryuya's laboratory
           </Typography>
           <Typography
             variant="h5"
@@ -38,7 +38,7 @@ export default function Home() {
             color="text.secondary"
             sx={{ fontWeight: '400' }}
           >
-            Front-end Development & UI/UX Design
+            IT & Design / Creating with joy.
           </Typography>
         </Box>
 
