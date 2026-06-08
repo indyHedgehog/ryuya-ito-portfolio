@@ -11,6 +11,7 @@ import {
 } from '@mui/material'; // ★ Buttonを追加
 import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore';
 import { projectsData } from '@/data/projectsData';
+import { Contact } from '@/components/layout/Contact';
 
 interface PageProps {
   params: Promise<{ id: string }>;

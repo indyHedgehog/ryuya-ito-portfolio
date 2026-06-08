@@ -2,12 +2,12 @@
 
 import { Container, Typography, Box, Divider } from '@mui/material';
 import { ProjectList } from '@/components/ProjectList';
-import { Contact } from '@/components/Contact';
+import { Contact } from '@/components/layout/Contact';
 import { projectsData } from '@/data/projectsData';
 import { AboutMe } from '@/components/AboutMe';
 import { Section } from '@/components/Section';
 import { HobbyList } from '@/components/HobbyCard';
-import { Header } from '@/components/Header'; // ★ ヘッダーをインポート
+import { Header } from '@/components/layout/Header'; // ★ ヘッダーをインポート
 
 export default function Home() {
   return (
