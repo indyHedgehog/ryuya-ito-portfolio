@@ -33,41 +33,25 @@ export const projectsData: Project[] = [
     id: 'digital-twin-platform',
     title: 'デジタルツインWebアプリケーション開発',
     context: '株式会社NTTデータCCS 所属時',
-    period: '2025.10 - 2026.02', // タイムラインに沿って設定（適宜調整してください）
+    period: '2025.9 - 2026.04', // タイムラインに沿って設定（適宜調整してください）
     technologies: [
       'React',
       'TypeScript',
       'MapLibre GL',
       'Three.js',
-      'Shader (GLSL)',
       'Material UI',
+      'Cypress',
     ],
     summary:
       '広域な3D都市モデルや衛星画像、地図データをWebブラウザ上で統合・可視化する大型プラットフォームのフロントエンド開発を担当。（詳細社外秘のため、サムネイルはAIイメージ）',
     imageUrl: '/images/works/DigitalTwin-image.webp',
     // content: <Work3 /> // ★ 後ほど詳細用の個別コンポーネントをここにドッキング
   },
-  // {
-  //   id: 'internal-tech-study-group',
-  //   title: '開発力ジム（社内勉強会の設立・運営）',
-  //   context: '株式会社NTTデータCCS 所属時',
-  //   period: '2025.05 - 2026.05',
-  //   technologies: [
-  //     'Technical Training',
-  //     'Curriculum Design',
-  //     'Facilitation',
-  //     'Community Management',
-  //   ],
-  //   summary:
-  //     '社内の開発技術基盤の底上げと、知見のボトムアップを目的に、開発知識を総合的に学ぶテック勉強会をゼロから発議・設立。社内有識者をアドバイザーとして巻き込み、若手社員の技術レベル向上に貢献。',
-  //   imageUrl: '/images/works/StudyGroup.webp',
-  //   // content: <Work6 />
-  // },
   {
     id: 'museum-encounter-design',
     title: '美術館「Encounter」の設計・モデリング',
     context: '大学（建築・空間デザイン演習）', // 統一された青文字で綺麗に表示されます
-    period: '2024.01 - 2024.03', // 大学時代の適切な時期に調整してください
+    period: '2022.06', // 大学時代の適切な時期に調整してください
     technologies: [
       'Spatial Design',
       '3D Modeling',
@@ -105,5 +89,21 @@ export const projectsData: Project[] = [
       '使い終わった後に「植木鉢」へと生まれ変わる、サステナブルな調味料入れのパッケージデザイン。モデリングには Rhinoceros を用い、3Dプリンターにて作成。',
     imageUrl: '/images/works/littlePot/little_comp.webp', // 3Dモデルのレンダリング画像や実物写真のパス
     // content: <Work4 /> // ★ 今後詳細ページを構築する際のコンポーネント枠
+  },
+  {
+    id: 'internal-tech-study-group',
+    title: '開発力ジム（社内勉強会の設立・運営）',
+    context: '株式会社NTTデータCCS 所属時',
+    period: '2025.05 - 2026.05',
+    technologies: [
+      'Technical Training',
+      'Curriculum Design',
+      'Facilitation',
+      'Community Management',
+    ],
+    summary:
+      '社内の開発技術基盤の底上げと、知見のボトムアップを目的に、開発知識を総合的に学ぶテック勉強会をゼロから発議・設立。社内有識者をアドバイザーとして巻き込み、若手社員の技術レベル向上に貢献。',
+    imageUrl: '/images/works/study.webp',
+    // content: <Work6 />
   },
 ];
