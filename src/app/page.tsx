@@ -1,6 +1,6 @@
 'use client';
 
-import { Container, Typography, Box, Divider } from '@mui/material';
+import { Container, Typography, Box, Divider, Grid } from '@mui/material';
 import { ProjectList } from '@/components/ProjectList';
 import { Contact } from '@/components/layout/Contact';
 import { projectsData } from '@/data/projectsData';
@@ -12,12 +12,8 @@ import { SkillMagnet } from '@/components/SkillMagnet';
 
 export default function Home() {
   return (
-    // Top位置の基準となるidを設定
     <Box id="top">
-      {/* ★ ヘッダーコンポーネントを配置 */}
       <Header />
-
-      {/* ヘッダーが上部にかぶるため、コンテンツ全体に少し多めの pt を持たせるか、調整を入れると綺麗です */}
       <Container maxWidth="lg" sx={{ py: 8, mt: { xs: 4, md: 8 } }}>
         {/* 1. タイトル＆ヒーローセクション */}
         <Box sx={{ textBreak: 'keep-all', mb: 10, textAlign: 'center' }}>
@@ -46,33 +42,43 @@ export default function Home() {
         <Divider sx={{ mb: 8 }} />
 
         {/* 2. プロフィールセクション */}
-        {/* ★ スムーススクロール用のidを付与 */}
         <Box id="about-me">
           <Section title="About Me">
             <AboutMe />
           </Section>
 
           <Section title="Skills">
-            <SkillMagnet />
-          </Section>
-
-          <Section title="Hobbies">
-            <HobbyList />
+            <Grid container spacing={3}>
+              <SkillMagnet />
+              <Typography
+                variant="body1"
+                color="text.secondary"
+                sx={{ fontSize: '1.1rem', lineHeight: 2.3 }}
+              >
+                私の強みは、デザイン・3Dモデリング・フロントエンド開発の3つの領域をシームレスに横断できることです。Figmaによる直感的なUI設計から、Three.jsやMapLibreを用いたインタラクティブな表現、そしてTypeScript
+                /
+                Reactによるモダンなコンポーネント実装まで、プロダクトの価値を最大化するためのテクノロジーとデザインを追求しています。
+              </Typography>
+            </Grid>
           </Section>
         </Box>
 
         {/* 3. 作品一覧（プロダクト）セクション */}
-        {/* ★ スムーススクロール用のidを付与（Worksに紐付け） */}
         <Box id="works">
           <Section title="Works">
             <ProjectList projects={projectsData} />
           </Section>
         </Box>
 
+        <Box>
+          <Section title="Hobbies">
+            <HobbyList />
+          </Section>
+        </Box>
+
         <Divider sx={{ my: 6 }} />
 
         {/* 4. コンタクトセクション */}
-        {/* ★ スムーススクロール用のidを付与 */}
         <Box id="contact">
           <Contact />
         </Box>

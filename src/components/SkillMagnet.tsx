@@ -23,9 +23,9 @@ const skillsData: SkillItem[] = [
         src="/images/icons/figma.svg"
         alt="Figma"
         sx={{
-          width: 42,
-          height: 42,
-          transform: 'scale(1.9)',
+          width: 54,
+          height: 54,
+          transform: 'scale(2.0)',
           pointerEvents: 'none',
         }}
       />
@@ -112,16 +112,64 @@ const skillsData: SkillItem[] = [
     ),
   },
   {
-    name: 'Adobe_Illustrator',
+    name: 'Adobe Illustrator',
     icon: (
       <Box
         component="img"
         src="/images/icons/Adobe_Illustrator.svg"
-        alt="Adobe_Illustrator"
+        alt="Adobe Illustrator"
         sx={{
           width: 42,
           height: 42,
           transform: 'scale(1.0)',
+          pointerEvents: 'none',
+        }}
+      />
+    ),
+  },
+  {
+    name: 'Autodesk Revit',
+    icon: (
+      <Box
+        component="img"
+        src="/images/icons/Aoutdesk.webp"
+        alt="Autodesk Revit"
+        sx={{
+          width: 42,
+          height: 42,
+          transform: 'scale(0.8)',
+          pointerEvents: 'none',
+        }}
+      />
+    ),
+  },
+  {
+    name: 'Rhinoceros',
+    icon: (
+      <Box
+        component="img"
+        src="/images/icons/RhinoLogo.svg"
+        alt="Rhinoceros"
+        sx={{
+          width: 42,
+          height: 42,
+          transform: 'scale(1.5)',
+          pointerEvents: 'none',
+        }}
+      />
+    ),
+  },
+  {
+    name: 'UX検定™基礎（HCD検®認定）',
+    icon: (
+      <Box
+        component="img"
+        src="/images/icons/UXtest.webp"
+        alt="UX検定™基礎（HCD検®認定）"
+        sx={{
+          width: 42,
+          height: 23,
+          transform: 'scale(1.5)',
           pointerEvents: 'none',
         }}
       />
