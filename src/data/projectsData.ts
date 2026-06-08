@@ -25,7 +25,7 @@ export const projectsData: Project[] = [
     period: '2025.07 - 2025.09',
     technologies: ['Figma', 'UI/UX'],
     summary:
-      '大手イベント会社のシステム刷新コンペにて、画面設計・プロトタイプ作成を担当しました。',
+      '大手イベント会社のシステム刷新コンペにて、画面設計・プロトタイプ作成を担当し入札。',
     imageUrl: '/images/works/Figma.webp',
     // content: <Work1 /> // ★ ここで個別コンポーネントをドッキング！
   },
@@ -44,14 +44,41 @@ export const projectsData: Project[] = [
     ],
     summary:
       '広域な3D都市モデルや衛星画像、地図データをWebブラウザ上で統合・可視化する大型プラットフォームのフロントエンド開発を担当。',
-    imageUrl: '/images/works/DigitalTwin.webp', // 開発イメージやダッシュボードのモック等
+    imageUrl: '/images/works/DigitalTwin.webp',
     // content: <Work3 /> // ★ 後ほど詳細用の個別コンポーネントをここにドッキング
+  },
+  // {
+  //   id: 'internal-tech-study-group',
+  //   title: '開発力ジム（社内勉強会の設立・運営）',
+  //   context: '株式会社NTTデータCCS 所属時',
+  //   period: '2025.05 - 2026.05',
+  //   technologies: [
+  //     'Technical Training',
+  //     'Curriculum Design',
+  //     'Facilitation',
+  //     'Community Management',
+  //   ],
+  //   summary:
+  //     '社内の開発技術基盤の底上げと、知見のボトムアップを目的に、開発知識を総合的に学ぶテック勉強会をゼロから発議・設立。社内有識者をアドバイザーとして巻き込み、若手社員の技術レベル向上に貢献。',
+  //   imageUrl: '/images/works/StudyGroup.webp',
+  //   // content: <Work6 />
+  // },
+  {
+    id: 'pasta-monument-object',
+    title: 'モニュメントの提案・ミニチュア造形',
+    context: '大学（空間デザイン・立体造形演習）',
+    period: '2022.01', // 大学時代の適切な時期に調整してください
+    technologies: ['Spatial Design', 'Prototyping', 'Concept Design'],
+    summary:
+      'モニュメントの提案・ミニチュア作成をする授業にて、単独では何にもなりえパスタを用い、Reliance （依存）という作品を提案・作成しました。',
+    imageUrl: '/images/works/Reliance/reliance.webp', // ミニチュアの作品写真やスケッチなどのパス
+    // content: <Work5 /> // ★ 今後詳細ページを構築する際のコンポーネント枠
   },
   {
     id: 'upcycle-package-pot',
     title: 'アップサイクル調味料パッケージの提案・試作',
     context: '大学（パッケージデザイン・プロダクト造形演習）',
-    period: '2021',
+    period: '2021.12',
     technologies: [
       'Rhinoceros',
       '3D Printer',

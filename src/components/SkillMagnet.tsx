@@ -216,7 +216,7 @@ export const SkillMagnet: React.FC = () => {
         sx={{
           position: 'relative',
           width: '100%',
-          height: '230px', // 高さは230pxを維持してゆったりホールド
+          height: '250px', // 高さは230pxを維持してゆったりホールド
           background: 'linear-gradient(145deg, #f8f9fa 0%, #f1f3f5 100%)',
           boxShadow: 'inset 0 2px 8px rgba(0, 0, 0, 0.02)',
           borderRadius: 4,
@@ -230,8 +230,8 @@ export const SkillMagnet: React.FC = () => {
             content: '"Click to Blast!"',
             position: 'absolute',
             bottom: 4,
-            color: 'text.primary',
-            opacity: 0.6,
+            color: 'primary.main',
+            opacity: 0.8,
             fontSize: '0.75rem',
             fontWeight: '700',
             letterSpacing: '0.2em',
