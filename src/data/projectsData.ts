@@ -1,4 +1,5 @@
 import { Project } from '@/types/project';
+import { MuseumEncounter } from '@/components/works/MuseumEncounter'; // パスは環境に合わせてください
 
 export const projectsData: Project[] = [
   {
@@ -16,7 +17,6 @@ export const projectsData: Project[] = [
     summary:
       '「シンプル」な使いやすさと、触れたときの「ワクワク」を両立させることをコンセプトに構築しました。細部までこだわりを詰め込んでいますので、ぜひ楽しんでご覧ください。',
     imageUrl: '/images/works/Portfolio.webp', // ポートフォリオのキャプチャ画像などのパス
-    // content: <Work2 /> // ★ この下に用意した個別コンポーネントをドッキング
   },
   {
     id: 'staffing-system',
@@ -27,7 +27,6 @@ export const projectsData: Project[] = [
     summary:
       '大手イベント会社のシステム刷新コンペにて、画面設計・プロトタイプ作成を担当し入札。',
     imageUrl: '/images/works/Figma.webp',
-    // content: <Work1 /> // ★ ここで個別コンポーネントをドッキング！
   },
   {
     id: 'digital-twin-platform',
@@ -45,7 +44,6 @@ export const projectsData: Project[] = [
     summary:
       '広域な3D都市モデルや衛星画像、地図データをWebブラウザ上で統合・可視化する大型プラットフォームのフロントエンド開発を担当。（詳細社外秘のため、サムネイルはAIイメージ）',
     imageUrl: '/images/works/DigitalTwin-image.webp',
-    // content: <Work3 /> // ★ 後ほど詳細用の個別コンポーネントをここにドッキング
   },
   {
     id: 'museum-encounter-design',
@@ -61,7 +59,7 @@ export const projectsData: Project[] = [
     summary:
       '自然豊かな公園の敷地特性を活かし、「孤独を豊かに愉しみ、作品と一対一で対話する」をコンセプトに掲げた美術館「Encounter」の企画・設計。',
     imageUrl: '/images/works/encounter/gate.webp', // 建築パース、3Dレンダリング、または図面・模型写真のパス
-    // content: <Work7 /> // ★ 今後詳細ページを構築する際のコンポーネント枠
+    hasDetailPage: true,
   },
   {
     id: 'pasta-monument-object',
@@ -72,7 +70,6 @@ export const projectsData: Project[] = [
     summary:
       'モニュメントの提案・ミニチュア作成をする授業にて、単独では何にもなりえパスタを用い、作品: Reliance （依存）を提案・作成しました。',
     imageUrl: '/images/works/Reliance/reliance.webp', // ミニチュアの作品写真やスケッチなどのパス
-    // content: <Work5 /> // ★ 今後詳細ページを構築する際のコンポーネント枠
   },
   {
     id: 'upcycle-package-pot',
@@ -88,7 +85,6 @@ export const projectsData: Project[] = [
     summary:
       '使い終わった後に「植木鉢」へと生まれ変わる、サステナブルな調味料入れのパッケージデザイン。モデリングには Rhinoceros を用い、3Dプリンターにて作成。',
     imageUrl: '/images/works/littlePot/little_comp.webp', // 3Dモデルのレンダリング画像や実物写真のパス
-    // content: <Work4 /> // ★ 今後詳細ページを構築する際のコンポーネント枠
   },
   {
     id: 'internal-tech-study-group',
@@ -104,6 +100,5 @@ export const projectsData: Project[] = [
     summary:
       '社内の開発技術基盤の底上げと、知見のボトムアップを目的に、開発知識を総合的に学ぶテック勉強会をゼロから発議・設立。社内有識者をアドバイザーとして巻き込み、若手社員の技術レベル向上に貢献。',
     imageUrl: '/images/works/study.webp',
-    // content: <Work6 />
   },
 ];

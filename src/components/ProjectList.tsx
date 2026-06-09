@@ -16,21 +16,42 @@ interface ProjectCardProps {
   project: Project;
 }
 
-// 1. 単体のカードコンポーネント（関心事はカードの内側だけ）
+// 1. 単体のカードコンポーネント
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
+  const isClickable = !!project.hasDetailPage;
+
   return (
     <Card
-      sx={{ maxWidth: '100%', width: '100%', borderRadius: 3, boxShadow: 2 }}
+      sx={{
+        maxWidth: '100%',
+        width: '100%',
+        borderRadius: 3,
+        boxShadow: 2,
+        transition: 'transform 0.2s, box-shadow 0.2s',
+        ...(isClickable
+          ? {
+              '&:hover': {
+                transform: 'translateY(-2px)',
+                boxShadow: 4,
+              },
+            }
+          : {}),
+      }}
     >
       <CardActionArea
-        component={Link}
-        href={`/projects/${project.id}`}
+        component={isClickable ? Link : 'div'}
+        href={isClickable ? `/projects/${project.id}` : undefined}
+        disabled={!isClickable} // ページがないものはMUI標準のdisabled状態にする
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           alignItems: 'center',
           justifyContent: 'flex-start',
           p: { xs: 2, sm: 3 },
+          // disabled 時もテキストの鮮やかさを 100% 維持する
+          '&.Mui-disabled': {
+            opacity: 1,
+          },
         }}
       >
         <CardMedia
@@ -61,13 +82,13 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
           {/* 所属・背景 */}
           <Typography
             variant="caption"
-            color="primary.main" // ★ text.secondary から変更して青色に統一
+            color="primary.main"
             sx={{
               display: 'block',
               mb: 1.5,
-              fontWeight: 600, // ★ 500〜600あたりで全体の太さとバランスを取っています
+              fontWeight: 600,
               letterSpacing: '0.04em',
-              fontSize: '0.75rem', // ★ キャプションとして自然なサイズ感に微調整
+              fontSize: '0.75rem',
             }}
           >
             {project.context}
@@ -91,8 +112,7 @@ interface ProjectListProps {
   projects: Project[];
 }
 
-// 2. ★新しく追加：リストとして並べるためのコンポーネント
-// Grid のレイアウト構造やループ処理（map）をここに閉じ込めます
+// 2. リストとして並べるためのコンポーネント
 export const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   return (
     <Grid container spacing={4}>

@@ -70,6 +70,7 @@ export default function Home() {
           </Section>
         </Box>
 
+        {/* 4. 趣味セクション */}
         <Box>
           <Section title="Hobbies">
             <HobbyList />

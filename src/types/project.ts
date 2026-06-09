@@ -9,7 +9,5 @@ export interface Project {
   technologies: string[]; // 使用技術 (例: ["React", "TypeScript", "Material UI"])
   summary: string; // 概要・要約
   imageUrl: string; // ヘッダー用アイキャッチ画像
-
-  // 各プロジェクト固有のメインコンテンツ（コンポーネント）を保持する枠
-  content?: React.ReactNode;
+  hasDetailPage?: boolean; // 詳細ページが存在する場合は true
 }
