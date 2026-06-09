@@ -69,7 +69,7 @@ export const projectsData: Project[] = [
     technologies: ['Spatial Design', 'Prototyping', 'Concept Design'],
     summary:
       'モニュメントの提案・ミニチュア作成をする授業にて、単独では何にもなりえパスタを用い、作品: Reliance （依存）を提案・作成しました。',
-    imageUrl: '/images/works/reliance/reliance.webp', // ミニチュアの作品写真やスケッチなどのパス
+    imageUrl: '/images/works/reliance_area/complete.webp', // ミニチュアの作品写真やスケッチなどのパス
     hasDetailPage: true,
   },
   {

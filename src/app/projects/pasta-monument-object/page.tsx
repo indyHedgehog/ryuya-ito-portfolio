@@ -11,15 +11,15 @@ import { projectsData } from '@/data/projectsData';
 // パスタオブジェクトプロジェクト専用の画像配列
 const PASTA_IMAGES = [
   {
-    src: '/images/works/reliance/prototype1.webp',
+    src: '/images/works/reliance_area/prototype1.webp',
     alt: 'プロトタイピング',
   },
   {
-    src: '/images/works/reliance/prototype2.webp',
+    src: '/images/works/reliance_area/prototype2.webp',
     alt: '途中経過',
   },
   {
-    src: '/images/works/reliance/reliance.webp',
+    src: '/images/works/reliance_area/complete.webp',
     alt: '作品: Reliance',
   },
 ];
@@ -75,7 +75,7 @@ export default function PastaMonumentObjectPage() {
                   >
                     <Box
                       component="img"
-                      src="/images/works/reliance/shop.webp"
+                      src="/images/works/reliance_area/shop.webp"
                       alt="正方形ボード上の空間設計"
                       sx={{
                         width: '100%',
@@ -158,7 +158,7 @@ export default function PastaMonumentObjectPage() {
                   >
                     <Box
                       component="img"
-                      src="/images/works/reliance/why.webp" // 💡 パスタがトマト缶に絡みつくマクロ撮影などの写真のパス
+                      src="/images/works/reliance_area/why.webp" // 💡 パスタがトマト缶に絡みつくマクロ撮影などの写真のパス
                       alt="作品コンセプトディテール"
                       sx={{
                         width: '100%',
