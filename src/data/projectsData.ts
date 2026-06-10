@@ -1,5 +1,4 @@
 import { Project } from '@/types/project';
-import { MuseumEncounter } from '@/components/works/MuseumEncounter'; // パスは環境に合わせてください
 
 export const projectsData: Project[] = [
   {
@@ -27,6 +26,7 @@ export const projectsData: Project[] = [
     summary:
       '大手イベント会社のシステム刷新コンペにて、画面設計・プロトタイプ作成を担当し入札。',
     imageUrl: '/images/works/Figma.webp',
+    hasDetailPage: true,
   },
   {
     id: 'digital-twin-platform',
