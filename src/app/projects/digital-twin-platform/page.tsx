@@ -5,7 +5,6 @@ import { notFound } from 'next/navigation';
 import { Container, Box, Typography, Paper } from '@mui/material';
 import maplibregl from 'maplibre-gl';
 import * as THREE from 'three';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { ProjectHeader } from '@/components/layout/ProjectHeader';
 import { Section } from '@/components/Section';
 import { projectsData } from '@/data/projectsData';
@@ -88,7 +87,7 @@ export default function DigitalTwinPlatformPage() {
         this.camera = new THREE.Camera();
         this.scene = new THREE.Scene();
 
-        // ライティング（3D都市モデルが綺麗に見えるように環境光と平行光源を追加）
+        // ライティング（3D都市モデルが綺麗見えるように環境光と平行光源を追加）
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         this.scene.add(ambientLight);
 
@@ -102,16 +101,6 @@ export default function DigitalTwinPlatformPage() {
         const cube = new THREE.Mesh(geometry, material);
         cube.position.set(0, 0, 50); // 地面に接地させる
         this.scene.add(cube);
-
-        // 💡 GLTF/GLBモデルの読み込み（ファイルを配置したらここのコメントアウトを解除）
-        /*
-        const loader = new GLTFLoader();
-        loader.load('/models/tokyo.glb', (gltf) => {
-          // モデルのサイズや向きの微調整が必要な場合はここで行います
-          gltf.scene.rotation.x = Math.PI / 2; // 必要に応じて調整
-          this.scene.add(gltf.scene);
-        });
-        */
 
         this.map = map;
         this.renderer = new THREE.WebGLRenderer({
@@ -165,7 +154,16 @@ export default function DigitalTwinPlatformPage() {
       map.addLayer(customLayer);
     });
 
+    // 💡 PC版サイズ変形時の描画崩れを防ぐResizeObserverの設置
+    const resizeObserver = new ResizeObserver(() => {
+      map.resize();
+    });
+    if (mapContainerRef.current) {
+      resizeObserver.observe(mapContainerRef.current);
+    }
+
     return () => {
+      resizeObserver.disconnect();
       map.remove();
     };
   }, []);
@@ -195,12 +193,14 @@ export default function DigitalTwinPlatformPage() {
               で、地図全体のピッチ（傾き）や方位角を自由に変更し、3D空間を周回することができます。
             </Typography>
 
-            {/* 地図を表示するキャンバスコンテナ */}
+            {/* 💡 スタイルをPC版向けに最適化した地図を表示するキャンバスコンテナ */}
             <Paper
               elevation={3}
               sx={{
-                width: '100%',
-                height: { xs: '400px', md: '550px' },
+                width: { xs: '100%', md: '70%' }, // 💡 PC(md)以上で横幅を7割に制限
+                aspectRatio: { xs: 'unset', md: '4 / 3' }, // 💡 PC(md)以上で4:3の比率を指定
+                height: { xs: '400px', md: 'auto' }, // 💡 比率維持のためPC版は高さauto
+                mx: 'auto', // 💡 縮小した地図コンポーネントを中央に配置
                 borderRadius: 4,
                 overflow: 'hidden',
                 position: 'relative',
