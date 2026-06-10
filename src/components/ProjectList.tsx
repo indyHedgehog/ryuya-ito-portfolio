@@ -8,18 +8,16 @@ import {
   CardMedia,
   Typography,
   CardActionArea,
-  Grid,
 } from '@mui/material';
+import Grid from '@mui/material/Grid';
 import { Project } from '@/types/project';
 
 interface ProjectCardProps {
   project: Project;
 }
 
-// 1. 単体のカードコンポーネント
 export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
-  const isClickable = !!project.hasDetailPage;
-
+  // 💡 全プロジェクトをクリック可能にするため isClickable 判定条件を常に true に変更、または撤去
   return (
     <Card
       sx={{
@@ -28,30 +26,21 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         borderRadius: 3,
         boxShadow: 2,
         transition: 'transform 0.2s, box-shadow 0.2s',
-        ...(isClickable
-          ? {
-              '&:hover': {
-                transform: 'translateY(-2px)',
-                boxShadow: 4,
-              },
-            }
-          : {}),
+        '&:hover': {
+          transform: 'translateY(-2px)',
+          boxShadow: 4,
+        },
       }}
     >
       <CardActionArea
-        component={isClickable ? Link : 'div'}
-        href={isClickable ? `/projects/${project.id}` : undefined}
-        disabled={!isClickable} // ページがないものはMUI標準のdisabled状態にする
+        component={Link}
+        href={`/projects/${project.id}`} // 💡 常に詳細リンクを有効化
         sx={{
           display: 'flex',
           flexDirection: { xs: 'column', sm: 'row' },
           alignItems: 'center',
           justifyContent: 'flex-start',
           p: { xs: 2, sm: 3 },
-          // disabled 時もテキストの鮮やかさを 100% 維持する
-          '&.Mui-disabled': {
-            opacity: 1,
-          },
         }}
       >
         <CardMedia
@@ -69,7 +58,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
         <CardContent
           sx={{ flex: 1, pl: { xs: 0, sm: 4 }, pt: { xs: 2, sm: 0 } }}
         >
-          {/* タイトル */}
           <Typography
             gutterBottom
             variant="h5"
@@ -79,7 +67,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             {project.title}
           </Typography>
 
-          {/* 所属・背景 */}
           <Typography
             variant="caption"
             color="primary.main"
@@ -94,7 +81,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
             {project.context}
           </Typography>
 
-          {/* 概要 */}
           <Typography
             variant="body2"
             color="text.secondary"
@@ -112,7 +98,6 @@ interface ProjectListProps {
   projects: Project[];
 }
 
-// 2. リストとして並べるためのコンポーネント
 export const ProjectList: React.FC<ProjectListProps> = ({ projects }) => {
   return (
     <Grid container spacing={4}>
