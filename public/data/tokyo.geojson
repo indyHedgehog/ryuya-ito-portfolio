@@ -1,0 +1,26 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "東京駅前テストタワー",
+        "height": 150,
+        "base_height": 0,
+        "color": "#ff4444"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [139.7656, 35.6815],
+            [139.7666, 35.6815],
+            [139.7666, 35.6810],
+            [139.7656, 35.6810],
+            [139.7656, 35.6815]
+          ]
+        ]
+      }
+    }
+  ]
+}
