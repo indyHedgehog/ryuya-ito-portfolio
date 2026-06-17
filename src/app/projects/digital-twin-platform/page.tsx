@@ -9,9 +9,14 @@ import { Section } from '@/components/Section';
 import { projectsData } from '@/data/projectsData';
 import { MapComponent } from '../../../components/mapComponent/MapComponent';
 import { AddPolygonLayer } from '../../../components/mapComponent/AddPolygonLayer';
+import { Add3DModelLayer } from '../../../components/mapComponent/Add3DModelLayer';
+
+// サンプルコードに基づく3Dモデルの初期配置（例：東京駅周辺、あるいはサンプル座標）
+const MODEL_ORIGIN_LON_LAT: [number, number] = [139.7661, 35.6813]; // MapComponentの初期中心に同期
+const MODEL_FILE_PATH =
+  'https://maplibre.org/maplibre-gl-js/docs/assets/34M_17/34M_17.gltf';
 
 export default function DigitalTwinPlatformPage() {
-  // 子コンポーネント間でMapLibreのインスタンスを共有するためのState
   const [mapInstance, setMapInstance] = useState<maplibregl.Map | null>(null);
 
   const project = projectsData.find((p) => p.id === 'digital-twin-platform');
@@ -39,14 +44,14 @@ export default function DigitalTwinPlatformPage() {
               color="text.secondary"
               sx={{ mb: 3, lineHeight: 1.6 }}
             >
-              MapLibre GL JS を用いて、地図上に GeoJSON
-              形式のポリゴン（赤い多角形の面データ）をレンダリングした WebGIS
-              デモです。
+              MapLibre GL JS と Three.js を連携させ、地図上に GeoJSON
+              ポリゴンデータおよび
+              3Dモデル（GLTF）を同一のWebGLコンテキストで融合してレンダリングした
+              WebGIS デモです。
               <strong>【マウスの右ドラッグ】または【Ctrl + ドラッグ】</strong>
-              で、地図のピッチ（傾き）や方位角を自由に変更し、俯瞰的な視点からポリゴンデータの配置を確認することができます。
+              で、ピッチや方位角を傾け、俯瞰的な3D都市空間を確認できます。
             </Typography>
 
-            {/* 地図コンポーネントの外枠コンテナ（サイズ設計はここで一元管理） */}
             <Paper
               elevation={3}
               sx={{
@@ -60,11 +65,18 @@ export default function DigitalTwinPlatformPage() {
                 border: '1px solid rgba(0, 0, 0, 0.05)',
               }}
             >
-              {/* 💡 地図レイヤーの表示・初期化を担当 */}
               <MapComponent onMapReady={setMapInstance}>
+                {/* 既存のポリゴンレイヤー */}
                 <AddPolygonLayer
                   map={mapInstance}
                   geoJsonPath="/data/tokyo.geojson"
+                />
+
+                {/* 新規追加の3Dモデルレイヤー */}
+                <Add3DModelLayer
+                  map={mapInstance}
+                  modelOrigin={MODEL_ORIGIN_LON_LAT}
+                  modelPath={MODEL_FILE_PATH}
                 />
               </MapComponent>
             </Paper>
