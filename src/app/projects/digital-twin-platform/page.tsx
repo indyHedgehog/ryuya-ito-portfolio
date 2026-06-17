@@ -37,7 +37,7 @@ export default function DigitalTwinPlatformPage() {
       />
 
       <Box sx={{ mt: { xs: 4, md: 6 } }}>
-        <Section title="都市モデリング・デモ">
+        <Section title="モデリング・デモ">
           <Container maxWidth="md" sx={{ pb: 8 }}>
             <Typography
               variant="body2"
@@ -69,7 +69,19 @@ export default function DigitalTwinPlatformPage() {
                 {/* 既存のポリゴンレイヤー */}
                 <AddPolygonLayer
                   map={mapInstance}
-                  geoJsonPath="/data/tokyo.geojson"
+                  geoJsonPath="/data/Thunder1.geojson"
+                />
+                <AddPolygonLayer
+                  map={mapInstance}
+                  geoJsonPath="/data/Thunder2.geojson"
+                />
+                <AddPolygonLayer
+                  map={mapInstance}
+                  geoJsonPath="/data/Thunder3.geojson"
+                />
+                <AddPolygonLayer
+                  map={mapInstance}
+                  geoJsonPath="/data/Thunder4.geojson"
                 />
 
                 {/* 新規追加の3Dモデルレイヤー */}

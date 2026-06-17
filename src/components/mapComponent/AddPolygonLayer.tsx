@@ -4,33 +4,31 @@ import { useEffect } from 'react';
 import maplibregl from 'maplibre-gl';
 
 // ==========================================
-// 1. ポリゴンデータのパラメータ（色、透明度、立体高さなど）定義
+// 1. スタイル設定の分離（不変の見た目に関する定義）
 // ==========================================
-const POLYGON_CONFIG = {
-  sourceId: 'geojson-polygon-source',
-  layerId: 'geojson-polygon-layer',
-
-  // ポリゴンの見た目の設定
-  styles: {
-    fillColor: '#ff4444', // ポリゴンの塗りつぶし色（鮮やかな赤）
-    fillOpacity: 0.5, // 不透明度（0.0 ～ 1.0）
-    outlineColor: '#ff0000', // 輪郭線の色
-
-    // 💡 もしポリゴンを「ビル」のように3Dに押し出したい場合はここを設定
-    // ※今回はMapLibre標準のfillレイヤーで実装していますが、
-    //   typeを'fill-extrusion'に変えるだけで簡単に3Dポリゴン化できます。
-    extrusionHeight: 50,
-  },
+const POLYGON_STYLE_CONFIG = {
+  fillColor: '#ff4444', // ポリゴンの塗りつぶし色（鮮やかな赤）
+  fillOpacity: 0.5, // 不透明度
+  outlineColor: '#ff0000', // 輪郭線の色
 };
 
 // ==========================================
-// 2. Props 定義（GeoJSONファイル のパス）
+// 2. Props 定義（geoJsonPath を必須化）
 // ==========================================
 interface AddPolygonLayerProps {
   /** MapLibreの地図インスタンス */
   map: maplibregl.Map | null;
-  /** レイヤーに表示するGeoJSONファイルのパス（必須） */
-  geoJsonPath?: string;
+  /** レイヤーに表示するGeoJSONファイルのパス（複数配置のため必須） */
+  geoJsonPath: string;
+}
+
+/**
+ * パス文字列から拡張子を除いたファイル名を抽出し、MapLibre用の安全なIDを生成する
+ */
+function generateIdFromPath(path: string): string {
+  const baseName = path.split('/').pop() || 'default';
+  // 拡張子を除去し、安全な文字のみ残す（記号のバグ防止）
+  return baseName.replace(/\.geojson$/i, '').replace(/[^a-zA-Z0-9-_]/g, '_');
 }
 
 // ==========================================
@@ -40,55 +38,77 @@ export function AddPolygonLayer({ map, geoJsonPath }: AddPolygonLayerProps) {
   useEffect(() => {
     if (!map) return;
 
-    // ==========================================
-    // 4. モデル（データ）がないときのエラーハンドリング
-    // ==========================================
-    const isValidPath = geoJsonPath && geoJsonPath.endsWith('.geojson');
+    // ファイル名から動的にソースIDとレイヤーIDを一意に生成
+    const layerKey = generateIdFromPath(geoJsonPath);
+    const sourceId = `source-${layerKey}`;
+    const layerId = `layer-${layerKey}`;
 
+    // 入力パスのバリデーション
+    const isValidPath =
+      geoJsonPath && geoJsonPath.toLowerCase().endsWith('.geojson');
     if (!isValidPath) {
       console.warn(
-        'モデルが見つかりません（Props にパスがわたっていない、またはパスが間違っています）',
+        `不正なGeoJSONパスが指定されました。処理をスキップします: ${geoJsonPath}`,
       );
       return;
     }
 
-    // 💡 MapLibreネイティブのGeoJSONソースとレイヤーを追加する処理
     try {
-      // ① GeoJSONを取得するための「Source（データ水源）」を定義
-      map.addSource(POLYGON_CONFIG.sourceId, {
+      // 既存のソースやレイヤーとの重複チェック（万が一の再レンダリング時のエラー抑止）
+      if (map.getLayer(layerId)) {
+        map.removeLayer(layerId);
+      }
+      if (map.getSource(sourceId)) {
+        map.removeSource(sourceId);
+      }
+
+      // ① 動的IDを用いてGeoJSONソースを追加
+      map.addSource(sourceId, {
         type: 'geojson',
-        data: geoJsonPath, // ローカルまたはリモートのURLをそのまま渡せます
+        data: geoJsonPath,
       });
 
-      // ② ソースを元に地図上に描画する「Layer（表現方法）」を追加
+      // ② 動的IDを用いてレイヤーを追加（ファイル名がレイヤー名に反映される）
       map.addLayer({
-        id: POLYGON_CONFIG.layerId,
-        type: 'fill', // 2Dポリゴン描画（面）
-        source: POLYGON_CONFIG.sourceId,
+        id: layerId,
+        type: 'fill',
+        source: sourceId,
         layout: {},
         paint: {
-          'fill-color': POLYGON_CONFIG.styles.fillColor,
-          'fill-opacity': POLYGON_CONFIG.styles.fillOpacity,
-          'fill-outline-color': POLYGON_CONFIG.styles.outlineColor,
+          'fill-color': POLYGON_STYLE_CONFIG.fillColor,
+          'fill-opacity': POLYGON_STYLE_CONFIG.fillOpacity,
+          'fill-outline-color': POLYGON_STYLE_CONFIG.outlineColor,
         },
       });
 
-      console.log(`GeoJSONポリゴンレイヤーをロードしました: ${geoJsonPath}`);
+      console.log(`レイヤー [${layerId}] をロードしました: ${geoJsonPath}`);
     } catch (error) {
-      console.error('レイヤーの追加中にエラーが発生しました:', error);
+      console.error(
+        `レイヤー [${layerId}] の追加中にエラーが発生しました:`,
+        error,
+      );
     }
 
-    // クリーンアップ（コンポーネントが消える時に地図からソースとレイヤーを削除）
+    // クリーンアップ（コンポーネントのアンマウント時に該当の動的IDターゲットのみをピンポイント削除）
     return () => {
-      if (map.getLayer(POLYGON_CONFIG.layerId)) {
-        map.removeLayer(POLYGON_CONFIG.layerId);
-      }
-      if (map.getSource(POLYGON_CONFIG.sourceId)) {
-        map.removeSource(POLYGON_CONFIG.sourceId);
+      if (!map) return;
+
+      try {
+        if (map.getLayer(layerId)) {
+          map.removeLayer(layerId);
+        }
+        if (map.getSource(sourceId)) {
+          map.removeSource(sourceId);
+        }
+        console.log(`レイヤー [${layerId}] をクリーンアップしました。`);
+      } catch (cleanUpError) {
+        console.error(
+          `レイヤー [${layerId}] のクリーンアップ中にエラーが発生しました:`,
+          cleanUpError,
+        );
       }
     };
   }, [map, geoJsonPath]);
 
-  // ロジック管理専用のためUIはレンダリングしない
   return null;
 }

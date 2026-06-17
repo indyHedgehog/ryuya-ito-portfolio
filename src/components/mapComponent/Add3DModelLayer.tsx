@@ -12,11 +12,11 @@ interface Add3DModelLayerProps {
   modelOrigin: [number, number];
   /** モデルの標高（メートル） */
   modelAltitude?: number;
-  /** モデルのパス（public配下の相対パス、または外部URL） */
-  modelPath: string;
+  /** * モデルのパス（省略された場合はデフォルトのアンテナモデルを表示）
+   */
+  modelPath?: string;
 }
 
-// 拡張インターフェース（MapLibreのCustomLayerInterfaceにThree.jsのプロパティを内包させる）
 interface ThreeCustomLayer extends maplibregl.CustomLayerInterface {
   camera: THREE.Camera | null;
   scene: THREE.Scene | null;
@@ -24,25 +24,29 @@ interface ThreeCustomLayer extends maplibregl.CustomLayerInterface {
   mapInstance: maplibregl.Map | null;
 }
 
+// デフォルトのアンテナモデルのURL
+const DEFAULT_ANTENNA_MODEL =
+  'https://maplibre.org/maplibre-gl-js/docs/assets/34M_17/34M_17.gltf';
+
 export function Add3DModelLayer({
   map,
   modelOrigin,
   modelAltitude = 0,
   modelPath,
 }: Add3DModelLayerProps) {
-  // レイヤーの重複登録防止やクリーンアップのための参照
   const layerId = 'custom-3d-model-layer';
   const layerRef = useRef<ThreeCustomLayer | null>(null);
+
+  // modelPath が指定されていればそれを使い、無ければデフォルトのアンテナを使う
+  const resolvedModelPath = modelPath || DEFAULT_ANTENNA_MODEL;
 
   useEffect(() => {
     if (!map) return;
 
-    // すでにレイヤーが存在する場合は一旦削除
     if (map.getLayer(layerId)) {
       map.removeLayer(layerId);
     }
 
-    // 地図上の座標変換パラメータを計算
     const modelAsMercatorCoordinate = maplibregl.MercatorCoordinate.fromLngLat(
       modelOrigin,
       modelAltitude,
@@ -58,7 +62,6 @@ export function Add3DModelLayer({
       scale: modelAsMercatorCoordinate.meterInMercatorCoordinateUnits(),
     };
 
-    // カスタムレイヤーオブジェクトの定義
     const customLayer: ThreeCustomLayer = {
       id: layerId,
       type: 'custom',
@@ -73,7 +76,7 @@ export function Add3DModelLayer({
         this.scene = new THREE.Scene();
         this.mapInstance = mapInstance;
 
-        // ライティングの設定
+        // ライティング
         const directionalLight = new THREE.DirectionalLight(0xffffff, 1.0);
         directionalLight.position.set(0, -70, 100).normalize();
         this.scene.add(directionalLight);
@@ -85,10 +88,10 @@ export function Add3DModelLayer({
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.4);
         this.scene.add(ambientLight);
 
-        // GLTFモデルのロード
+        // 決定されたパス（個別モデル or アンテナモデル）をロード
         const loader = new GLTFLoader();
         loader.load(
-          modelPath,
+          resolvedModelPath,
           (gltf) => {
             if (this.scene) {
               this.scene.add(gltf.scene);
@@ -96,11 +99,13 @@ export function Add3DModelLayer({
           },
           undefined,
           (error) => {
-            console.error('Failed to load 3D model:', error);
+            console.error(
+              `Failed to load 3D model from: ${resolvedModelPath}`,
+              error,
+            );
           },
         );
 
-        // MapLibreのCanvasとWebGLコンテキストをThree.jsと共有
         this.renderer = new THREE.WebGLRenderer({
           canvas: mapInstance.getCanvas(),
           context: gl,
@@ -114,7 +119,6 @@ export function Add3DModelLayer({
         if (!this.camera || !this.scene || !this.renderer || !this.mapInstance)
           return;
 
-        // 回転行列の作成
         const rotationX = new THREE.Matrix4().makeRotationAxis(
           new THREE.Vector3(1, 0, 0),
           modelTransform.rotateX,
@@ -128,7 +132,6 @@ export function Add3DModelLayer({
           modelTransform.rotateZ,
         );
 
-        // MapLibreの射影行列を取得してThree.jsのカメラに同期
         const m = new THREE.Matrix4().fromArray(
           args.defaultProjectionData.mainMatrix,
         );
@@ -151,7 +154,6 @@ export function Add3DModelLayer({
 
         this.camera.projectionMatrix = m.multiply(l);
 
-        // WebGL状態のリセットとレンダリング
         this.renderer.resetState();
         this.renderer.render(this.scene, this.camera);
         this.mapInstance.triggerRepaint();
@@ -161,13 +163,11 @@ export function Add3DModelLayer({
     layerRef.current = customLayer;
     map.addLayer(customLayer);
 
-    // クリーンアップ処理
     return () => {
       if (map && map.getLayer(layerId)) {
         map.removeLayer(layerId);
       }
 
-      // Three.jsのリソース解放 (メモリリーク対策)
       if (layerRef.current) {
         const scene = layerRef.current.scene;
         if (scene) {
@@ -185,7 +185,7 @@ export function Add3DModelLayer({
         layerRef.current.renderer?.dispose();
       }
     };
-  }, [map, modelPath, modelOrigin, modelAltitude]);
+  }, [map, resolvedModelPath, modelOrigin, modelAltitude]); // 依存配列に resolvedModelPath を指定
 
   return null;
 }
